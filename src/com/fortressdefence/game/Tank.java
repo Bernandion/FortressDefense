@@ -1,4 +1,4 @@
-package com.company;
+package com.fortressdefence.game;
 
 public class Tank {
     private int health;
@@ -26,19 +26,19 @@ public class Tank {
     public void updateDamage(){
         switch (this.health){
             case 4:
-                damage = 20;
+                this.damage = 20;
                 break;
             case 3:
-                damage = 5;
+                this.damage = 5;
                 break;
             case 2:
-                damage = 2;
+                this.damage = 2;
                 break;
             case 1:
-                damage = 1;
+                this.damage = 1;
                 break;
             case 0:
-                damage = 0;
+                this.damage = 0;
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.company;
+package com.fortressdefence.game;
 
 public class Cell {
 
@@ -6,15 +6,13 @@ public class Cell {
     private boolean hasTank;
     private Tank tank;
 
-    public Cell( ) {
+    public Cell() {
         this.isHit = false;
         this.hasTank = false;
         this.tank = null;
     }
 
-    public boolean isHit() {
-        return isHit;
-    }
+    public boolean isHit() { return isHit; }
 
     public boolean HasTank() {
         return hasTank;
