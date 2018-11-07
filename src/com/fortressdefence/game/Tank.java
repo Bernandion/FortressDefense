@@ -1,29 +1,36 @@
 package com.fortressdefence.game;
 
 public class Tank {
-    private int health;
+
+    // tanks start with 1 health
+    private int health = 1;
+
     private int damage;
 
     public int getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
     public int getDamage() {
         return damage;
+    }
+
+    /*
+        ** DONT THINK THIS IS NEEDED **
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public void setDamage(int damage) {
         this.damage = damage;
     }
-
+    */
 
     //Class Methods
 
-    public void updateDamage(){
+    // private method for updating the tanks damage when its health increases or decreases
+    private void updateDamage(){
         switch (this.health){
             case 4:
                 this.damage = 20;
@@ -37,17 +44,21 @@ public class Tank {
             case 1:
                 this.damage = 1;
                 break;
-            case 0:
+            default:
                 this.damage = 0;
                 break;
         }
     }
 
-    public void decreaseHealth(int damage){
-        this.health -= damage;
+    // decreases the tank's health by one of the player hits it
+    public void decreaseHealth(){
+        if (this.health > 0) this.health--;
+        updateDamage();
     }
 
-    public void increaseHealth(int damage){
-        this.health += damage;
+    // increases the tank's health by one during board creation
+    public void increaseHealth(){
+        if (this.health < 4) this.health++;
+        updateDamage();
     }
 }
