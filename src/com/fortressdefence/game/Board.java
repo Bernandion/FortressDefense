@@ -52,6 +52,12 @@ public class Board {
                 int tankCell = rand.nextInt(tankCells.size());
                 // randomly choose a cell adjacent to the selected part of the tank to build a new part
                 // loops until the new part of the tank is created
+
+                /**
+                 * This can cause an infinite loop if a ship gets trapped in a box of tanks.
+                 * Need to implement a limit on how many trys it gets to grow a tank,
+                 * and make it restart the loop from where it chooses a tanks starting point
+                 */
                 while (true){
                     int nextCellRow, nextCellCol;
                     switch(rand.nextInt(4)){
@@ -91,6 +97,13 @@ public class Board {
         }
     }
 
+    /**
+     *We should make input handler deal with parsing out the char into an int
+     * and also confirming the input is within the bounds of the board.
+     *
+     * Select cell's parameters should just be two ints that have already been confirmed to be valid row and column locations
+     * and just return the relative cell.
+     */
     // selects a cell on the board from passed user input and returns a boolean for if the cell contains a tank or not
     // Note: if tank is hit, true gets returned to the GameMain which sends to printHitMiss in ActionPrinter
     // handles tank damage if the cell does contain a tank
