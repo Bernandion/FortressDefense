@@ -1,10 +1,11 @@
 package com.fortressdefence.game;
 
+import com.fortressdefence.ui.InputHandler;
+
 public class Main {
 
     public static void main(String[] args) {
-        /**
-         * This Is a test Change
-         */
+        InputHandler input = new InputHandler();
+        input.getInput();
     }
 }
