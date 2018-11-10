@@ -1,6 +1,7 @@
 package com.fortressdefence.game;
 
 import com.fortressdefence.ui.ActionPrinter;
+import com.fortressdefence.ui.GameBoardPrinter;
 import com.fortressdefence.ui.InputHandler;
 
 import java.util.List;
