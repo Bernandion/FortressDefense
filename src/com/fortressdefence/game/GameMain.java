@@ -28,11 +28,12 @@ public class GameMain {
             // deals the damage for each tank to the health
             fortress -= enemyTanks.get(i).getDamage();
         }
+        actionPrinter.printTotalTankDamage();
     }
 
     private void playerTurn(){
         // loops until valid input is received
-        while (!inputHandler.getInput());
+        while (!inputHandler.getGameInput());
         int[] input = inputHandler.returnInput();
         // tries to hit the selected cell
         boolean hitMiss = gameBoard.selectCell(input[0], input[1]);
@@ -47,24 +48,25 @@ public class GameMain {
         while(true){
             // if player loses (fortress health reduced to 0) shows complete game board
             if (fortress <= 0){
-                // ACTIONPRINTER OR SOMETHING PRINTS MESSAGE SAYING GAME LOST
-                // CODE FOR PRINTING THE ENTIRE BOARD WITHOUT FOG FROM GAMEBOARDPRINTER HERE
-
+                // print the board without fog on loss
+                boardPrinter.printBoardWithoutFog(gameBoard);
+                // print message saying game lost
+                actionPrinter.printWinLoss(false);
                 // breaks out of the game once a key is pressed
-                if (/* ANYTHING ENTERED AS INPUT USING INPUTHANDLER*/) break;
+                if (inputHandler.getKeyPress()) break;
             }
             // if no tanks are alive, player wins
             else if (!gameBoard.tanksAlive()){
-                // ACTIONPRINTER OR SOMETHING PRINTS MESSAGE SAYING GAME WON
-
+                // print message saying game won
+                actionPrinter.printWinLoss(true);
                 // breaks out of the game once a key is pressed
-                if (/* ANYTHING ENTERED AS INPUT USING INPUTHANDLER*/) break;
+                if (inputHandler.getKeyPress()) break;
             }
             // run game normally
             else {
-                // SHOW THE GAME BOARD AND FORTRESS HEALTH
-                boardPrinter.printBoard(gameBoard);
+                // show the gameboard and fortress health information
                 actionPrinter.printFortressHealth(fortress);
+                boardPrinter.printBoard(gameBoard);
                 // do actions for the players turn
                 playerTurn();
                 // do actions for enemy turn

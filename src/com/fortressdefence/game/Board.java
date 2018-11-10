@@ -106,9 +106,9 @@ public class Board {
         if (containsTank && !curCell.isHit()){
             // decreases the health of the tank at this cell
             curCell.getTank().decreaseHealth();
-            // set the cell to hit
-            curCell.setIsHit(true);
         }
+        // set the cell to hit
+        curCell.setIsHit(true);
         return containsTank;
 
     }

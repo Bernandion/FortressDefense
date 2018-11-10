@@ -15,9 +15,8 @@ public class InputHandler {
     }
 
 
-    public boolean getInput(){
+    public boolean getGameInput(){
 
-        System.out.print("Enter the board location you want to attack: ");
         char Row;
         int Col;
 
@@ -47,6 +46,12 @@ public class InputHandler {
             return false;
         }
 
+    }
+
+    // returns true when key pressed
+    public boolean getKeyPress(){
+        this.scan.nextLine();
+        return true;
     }
 
     // returns the input

@@ -2,11 +2,7 @@ package com.fortressdefence.ui;
 
 public class ActionPrinter {
 
-    private int tankDamageTotal;
-
-    public ActionPrinter() {
-        this.tankDamageTotal = 0;
-    }
+    private int tankDamageTotal = 0;
 
     /**
      * Used to print if player input was a hit or miss
@@ -31,8 +27,18 @@ public class ActionPrinter {
      * @param tankID tank ID
      */
     public void printTankDamage(int damage, int tankID){
+        if (damage <= 0){
+            System.out.println("Enemy tank " + tankID + " didn't fire and dealt 0 damage!");
+        }
+        else {
             System.out.println("Enemy tank " + tankID + " fired and did " + damage + " damage!");
-            this.tankDamageTotal += damage;
+        }
+        this.tankDamageTotal += damage;
+    }
+
+    public void printTotalTankDamage(){
+        //print how much damage all the tanks did
+        System.out.println("In total the tanks did " + this.tankDamageTotal + " points worth of damage");
     }
 
 
@@ -42,8 +48,6 @@ public class ActionPrinter {
      */
     public void printFortressHealth(int currentHealth){
 
-        //print how much damage all the tanks did
-        System.out.println("In total the tanks did " + this.tankDamageTotal + " points worth of damage");
 
         //print the current health of the Fortress
         System.out.println("The Fortress has " + currentHealth + " health " + (currentHealth != 1 ? "points" : "point") + " remaining.");
@@ -55,14 +59,29 @@ public class ActionPrinter {
             else
                 System.out.println("The Fortress has " + currentHealth + " health points remaining.");*/
 
-        //calculate how many more hits the fortress can take
-        int hitsRemaining = (int) Math.ceil(currentHealth / tankDamageTotal);
+        // show number of hits fortress can take after the first player turn
+        if (currentHealth < 1500){
+            //calculate how many more hits the fortress can take
+            int hitsRemaining = (int) Math.ceil(currentHealth / tankDamageTotal);
 
-        //print how many more hits the fortress can take
-        if(hitsRemaining > 1) {
-            System.out.println("At the current rate we'll only survive " + hitsRemaining + " more volleys!");
+            //print how many more hits the fortress can take
+            if(hitsRemaining > 1) {
+                System.out.println("At the current rate we'll only survive " + hitsRemaining + " more volleys!");
+            }else if( hitsRemaining == 1)
+                System.out.println("This is it! If we don't knock them out with this next shot the Fortress will fall!");
+
             this.tankDamageTotal = 0;
-        }else if( hitsRemaining == 1)
-             System.out.println("This is it! If we don't knock them out with this next shot the Fortress will fall!");
+        }
+
+    }
+
+    public void printWinLoss(boolean gameWon){
+        if (gameWon){
+            System.out.println("Congratulations! You destroyed every tank! You win!");
+        }
+        else {
+            System.out.println("Your fortress is destroyed! You lose!");
+        }
+        System.out.println("Press enter to exit.");
     }
 }
