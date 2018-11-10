@@ -47,18 +47,15 @@ public class Board {
             cells[row][column].setHasTank(true);
             allTanks.add(newTank);
             // randomly add onto the created tank until its of size 4 (health 4)
-            while (newTank.getHealth() < 4){
+            // if unable to add onto the newTank after 50 loops, leaves the tank at it's current size
+            int growthTries = 0;
+            while (newTank.getHealth() < 4 && growthTries < 50){
                 // randomly select one of the created parts of the tank (cells the tank is in) to build the next part off of
                 int tankCell = rand.nextInt(tankCells.size());
                 // randomly choose a cell adjacent to the selected part of the tank to build a new part
-                // loops until the new part of the tank is created
-
-                /**
-                 * This can cause an infinite loop if a ship gets trapped in a box of tanks.
-                 * Need to implement a limit on how many trys it gets to grow a tank,
-                 * and make it restart the loop from where it chooses a tanks starting point
-                 */
-                while (true){
+                // loops to create a new part of tank is created in an adjacent cell
+                // if unable to after 50 times, breaks out and leaves the tank at its current size
+                for(int i=0; i<50; i++){
                     int nextCellRow, nextCellCol;
                     switch(rand.nextInt(4)){
                         // move to left cell
@@ -93,27 +90,17 @@ public class Board {
                         break;
                     }
                 }
+                // increment number of times the loop can try to extend the tank
+                growthTries++;
             }
         }
     }
 
-    /**
-     *We should make input handler deal with parsing out the char into an int
-     * and also confirming the input is within the bounds of the board.
-     *
-     * Select cell's parameters should just be two ints that have already been confirmed to be valid row and column locations
-     * and just return the relative cell.
-     */
     // selects a cell on the board from passed user input and returns a boolean for if the cell contains a tank or not
     // Note: if tank is hit, true gets returned to the GameMain which sends to printHitMiss in ActionPrinter
     // handles tank damage if the cell does contain a tank
-    public boolean selectCell(char row, int column){
-        // convert the character to an integer
-        // * NOTE: MAY NOT WORK, QUICKLY FOUND CODE ONLINE *
-        int rowIndex = (int)row % 32;
-        // if happens to be outside range, simply return false
-        if ((rowIndex > ROW_SIZE || rowIndex < 1)||(column > ROW_SIZE || column < 1)) return  false;
-        Cell curCell = cells[rowIndex-1][column-1];
+    public boolean selectCell(int row, int column){
+        Cell curCell = cells[row-1][column-1];
         boolean containsTank = curCell.hasTank();
         // if has tank that hasnt been hit yet, handle damage to tank
         if (containsTank && !curCell.isHit()){
