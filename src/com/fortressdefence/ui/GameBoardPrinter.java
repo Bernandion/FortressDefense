@@ -16,7 +16,9 @@ public class GameBoardPrinter {
         System.out.println(" 1 2 3 4 5 6 7 8 9 10");
 
         for(int row = 0; row < 10; row++){
+
             System.out.print(colChar);
+
             for(int col = 0; col<10;col++){
 
                 if(cells[row][col].hasTank() && cells[row][col].isHit())
