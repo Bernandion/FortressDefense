@@ -74,8 +74,6 @@ public class GameMain {
     }
 
     public static void main(String[] args) {
-        InputHandler input = new InputHandler();
-        input.getInput();
 
         // running the game
         GameMain game = new GameMain();
