@@ -38,7 +38,7 @@ public class InputHandler {
         try {
              // removes any spaces in input
              in.replaceAll("\\s+", "");
-             Row = in.charAt(0);
+             Row = in.toLowerCase().charAt(0);
              Col = Integer.parseInt(in.substring(1));
         } catch (Exception e) { // if it fails to parse an int it throw an exception and sets Row and Col out of bounds
             Row = 'z';
@@ -46,7 +46,7 @@ public class InputHandler {
         }
 
         // test if input is within bounds of the board
-        if ((Row >= 'a' && Row <= 'j' || Row >= 'A' && Row <= 'J') && (Col >= 1 && Col <= 10)) {
+        if ((Row >= 'a' && Row <= 'j')  && (Col >= 1 && Col <= 10)) {
            // convert the Row into an int relative to its position in the alphabet
            // put the two integers into an int array and set the input to be returned as the int array
            int[] a = { (int)Row - 'a' + 1, Col};

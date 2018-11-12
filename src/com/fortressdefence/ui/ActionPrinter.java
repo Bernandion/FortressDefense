@@ -29,7 +29,7 @@ public class ActionPrinter {
     // Used to print each individual tanks damage
     public void printTankDamage(int damage, int tankID){
         if (damage <= 0){
-            System.out.println("Enemy tank " + tankID + " didn't fire and dealt 0 damage!");
+            System.out.println("Enemy tank " + tankID + " didn't is destroyed and dealt 0 damage!");
         }
         else {
             System.out.println("Enemy tank " + tankID + " fired and did " + damage + " damage!");
