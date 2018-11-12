@@ -1,33 +1,19 @@
 package com.fortressdefence.game;
 
+/**
+ * Represents an enemy tank that can fire shots and has a certain amount of health based on it's size.
+ *
+ * @author Brandon Verigin
+ * @author Aric Anderson
+ *
+ */
 public class Tank {
 
     // tanks start with 1 health
     private int health = 1;
 
+    // damage dynamically changed throughout game based on health
     private int damage;
-
-    public int getHealth() {
-        return health;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    /*
-        ** DONT THINK THIS IS NEEDED **
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-    */
-
-    //Class Methods
 
     // private method for updating the tanks damage when its health increases or decreases
     private void updateDamage(){
@@ -50,15 +36,28 @@ public class Tank {
         }
     }
 
-    // decreases the tank's health by one of the player hits it
+    // decreases the tank's health by one if the player hits it
     public void decreaseHealth(){
+        // health cant be lower than 0
         if (this.health > 0) this.health--;
         updateDamage();
     }
 
     // increases the tank's health by one during board creation
     public void increaseHealth(){
+        // health cant be higher than 4
         if (this.health < 4) this.health++;
         updateDamage();
     }
+
+    // accessors
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
 }

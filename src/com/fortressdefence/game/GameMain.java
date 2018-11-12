@@ -6,6 +6,13 @@ import com.fortressdefence.ui.InputHandler;
 
 import java.util.List;
 
+/**
+ * Main class for running the game and controlling what happens at each point in the game.
+ *
+ * @author Brandon Verigin
+ * @author Aric Anderson
+ *
+ */
 public class GameMain {
 
     // starting health for the player
@@ -19,6 +26,7 @@ public class GameMain {
 
     private InputHandler inputHandler = new InputHandler();
 
+    // handles the actions to be taken on the enemy's turn in the game
     private void enemyTurn(){
         // sends enemy damage to the actionprinter and deals the damage to the fortress health for each tank
         List<Tank> enemyTanks = gameBoard.getAllTanks();
@@ -28,9 +36,11 @@ public class GameMain {
             // deals the damage for each tank to the health
             fortress -= enemyTanks.get(i).getDamage();
         }
+        // show the total amount of damage the tanks did to the player for this turn
         actionPrinter.printTotalTankDamage();
     }
 
+    // handles the actions to be taken on the player's turn in the game
     private void playerTurn(){
         // loops until valid input is received
         while (!inputHandler.getGameInput());
@@ -39,9 +49,9 @@ public class GameMain {
         boolean hitMiss = gameBoard.selectCell(input[0], input[1]);
         // prints if the choice was a hit or not
         actionPrinter.printHitMiss(hitMiss);
-
     }
 
+    // main method for running the entire game and exiting the game in certain conditions
     private void run(){
         // initial board setup
         gameBoard.setupBoard();
@@ -78,7 +88,7 @@ public class GameMain {
 
     public static void main(String[] args) {
 
-        // running the game
+        // playing the game
         GameMain game = new GameMain();
         game.run();
     }

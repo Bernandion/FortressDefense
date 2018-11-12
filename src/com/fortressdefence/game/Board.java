@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class for containing the cells of the play area and handling manipulation of the cells. Also tracks tanks
+ * that are on the play area.
+ *
+ * @author Brandon Verigin
+ * @author Aric Anderson
+ *
+ */
 public class Board {
 
     // constant for defining the size of one side of the board
@@ -19,6 +27,7 @@ public class Board {
     public Board(){
         for (int i=0; i<ROW_SIZE; i++){
             for (int j=0; j<ROW_SIZE; j++){
+                // create each cell based on its row (i) and column (j)
                 cells[i][j] = new Cell(i, j);
             }
         }
@@ -116,7 +125,7 @@ public class Board {
     // returns true or false for if the there are any tanks still alive
     // Note: used for controlling when to stop the game in GameMain
     public boolean tanksAlive(){
-        // returns true once a tank is found that has health
+        // returns true once a tank is found that has health, indicating there are still tanks to kill
         for (Tank tank : allTanks){
             if (tank.getHealth() > 0) return true;
         }
@@ -127,7 +136,7 @@ public class Board {
     // Note: used in GameBoardPrinter printBoard(Board) to iterate through to show board
     public Cell[][] getCells() { return this.cells; }
 
-    // returns all the tanks for use in GameMain
+    // returns all the tanks in game for use in GameMain
     // Note: used in enemyTurn()
     public List<Tank> getAllTanks() { return this.allTanks; }
 
